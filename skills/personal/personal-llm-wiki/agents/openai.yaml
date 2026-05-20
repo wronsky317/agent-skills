@@ -1,0 +1,4 @@
+interface:
+  display_name: "Personal LLM Wiki"
+  short_description: "Consult and maintain the user personal LLM wiki."
+  default_prompt: "Use my personal LLM wiki to ingest sources, answer questions, preserve durable insights, or health-check the knowledge base."

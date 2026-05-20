@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skill Repo Governance"
+  short_description: "Audit and maintain the shared skill repository."
+  default_prompt: "Use skill repo governance to audit, update, validate, or deduplicate skills in my shared skill repository."
