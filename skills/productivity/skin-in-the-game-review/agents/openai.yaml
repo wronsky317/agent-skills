@@ -1,0 +1,4 @@
+interface:
+  display_name: "非对称风险审查"
+  short_description: "从风险承担、实际仓位、问责和不可逆下行审核建议与观点"
+  default_prompt: "Use $skin-in-the-game-review to audit this proposal for asymmetric risk and produce a human fact-check plan."
