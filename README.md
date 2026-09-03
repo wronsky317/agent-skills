@@ -4,6 +4,8 @@
 
 大部分 skill 来自外部或系统安装，少部分是本机定制。`悟空` 相关内容除外。
 
+第三方来源与本地适配说明见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。Superpowers 工程工作流的逐项吸收映射见 [docs/superpowers-import.md](docs/superpowers-import.md)。
+
 ## 目录结构
 
 ```text

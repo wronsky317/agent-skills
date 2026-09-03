@@ -40,6 +40,8 @@ When the plan is approved and coding begins, use the `surgical-implementation` s
    - Put dependency work first.
    - Keep structural changes separate from behavior changes when possible.
    - Prefer the smallest diff that cleanly expresses the change.
+   - Make each task an independently reviewable, testable outcome rather than a bucket of unrelated setup work.
+   - Record interfaces produced for later tasks and dependencies consumed from earlier tasks when multiple implementers could execute the plan.
 
 6. **Risk review**
    - Call out data loss, security, concurrency, migration, compatibility, performance, and UX risks.
@@ -50,7 +52,13 @@ When the plan is approved and coding begins, use the `surgical-implementation` s
    - Include manual QA steps for user-facing behavior.
    - Add regression tests for bug fixes and edge cases.
 
-8. **Proceed or pause**
+8. **Self-review the written plan**
+   - Check every spec requirement maps to a task.
+   - Search for placeholders such as `TBD`, `TODO`, “handle edge cases”, or “add tests” without concrete detail.
+   - Verify paths, interfaces, types, and names are consistent between tasks.
+   - For high-risk plans, use [references/plan-document-reviewer-prompt.md](references/plan-document-reviewer-prompt.md) when an independent plan review is authorized.
+
+9. **Proceed or pause**
    - If the user asked only for a plan, stop after the plan.
    - If the user asked you to implement and there are no unresolved decisions, proceed after presenting the plan.
    - If key decisions remain, ask one focused question before coding.
@@ -91,3 +99,11 @@ Use this structure:
 - Include tests proportional to risk.
 - Make rollback obvious for migrations, config changes, and releases.
 - Do not hide uncertainty. Mark uncertain files/steps as "inspect first".
+
+## Verification
+
+- [ ] Every requirement has an implementation and verification step.
+- [ ] Task boundaries are independently testable and ordered by dependency.
+- [ ] Paths, interfaces, and names are internally consistent.
+- [ ] No vague placeholders remain.
+- [ ] Risks, rollout/rollback, and open decisions are explicit.

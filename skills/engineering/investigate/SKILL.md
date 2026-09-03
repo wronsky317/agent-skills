@@ -1,6 +1,6 @@
 ---
 name: investigate
-description: Use for debugging bugs, failing tests, errors, stack traces, regressions, unexpected behavior, flaky behavior, production incidents, or "why is this broken" requests. Requires root-cause investigation before fixes: reproduce, trace, form hypotheses, test evidence, then apply the smallest verified fix with regression coverage.
+description: Use when debugging bugs, failing tests, errors, stack traces, regressions, unexpected behavior, flaky behavior, production incidents, or "why is this broken" requests. Requires root-cause investigation before fixes: reproduce, trace, form hypotheses, test evidence, then apply the smallest verified fix with regression coverage.
 ---
 
 # Investigate
@@ -56,6 +56,17 @@ After the root cause is confirmed and the fix is straightforward, use the `surgi
    - Run relevant tests.
    - Check that no temporary instrumentation remains.
 
+## Focused References
+
+Load only the reference that matches the observed failure:
+
+- [references/root-cause-tracing.md](references/root-cause-tracing.md) when the symptom is far from the original bad input or caller.
+- [references/defense-in-depth.md](references/defense-in-depth.md) when invalid data crosses several trust or ownership boundaries.
+- [references/condition-based-waiting.md](references/condition-based-waiting.md) for flaky asynchronous tests that rely on arbitrary sleeps; the companion implementation is [references/condition-based-waiting-example.ts](references/condition-based-waiting-example.ts).
+- In npm projects, run `bash <investigate-skill-dir>/scripts/find-polluter.sh <artifact> <test-glob>` when a test creates persistent state and the polluting test is unknown. Resolve `<investigate-skill-dir>` from this `SKILL.md`.
+
+When adding a regression test before the fix, use `test-driven-development`. Before making a success claim, use `verification-before-completion`.
+
 ## Output Format
 
 Use this for the final report:
@@ -93,3 +104,11 @@ Stop and ask before continuing when:
 - Silencing an error instead of understanding why it occurred
 - Adding retries for deterministic failures
 - Treating flaky behavior as random before checking shared state, time, ordering, and isolation
+
+## Verification
+
+- [ ] The original symptom or a reliable proxy was reproduced.
+- [ ] The root cause is supported by test, log, debugger, or code-path evidence.
+- [ ] The fix targets the cause rather than suppressing the symptom.
+- [ ] Regression coverage fails without the fix and passes with it when practical.
+- [ ] The original reproduction and relevant surrounding checks pass after the fix.

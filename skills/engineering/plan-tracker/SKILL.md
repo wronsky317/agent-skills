@@ -1,13 +1,13 @@
 ---
 name: plan-tracker
-description: Plan 文件管理：在工作目录维护 PLAN_*.md 文件，记录实现计划和进度。当 agent 自身在做以下任何事情时主动触发：开始执行多步骤任务、context compact 后需要恢复上下文、完成某个实现步骤需要同步状态、创建新的实现计划。也在用户说"更新plan"、"创建plan"、"看下plan"、"plan状态"、"执行plan"时触发。
+description: 在当前项目根目录维护 PLAN_*.md，持久记录多步骤工作的上下文、步骤状态、验证证据与阻塞项。适用于创建或更新计划文件、context compact 后恢复进度、同步已完成步骤、查看 plan 状态；实际执行已有实现计划时与 executing-plans 配合使用。
 ---
 
 # Plan Tracker
 
 ## 核心职责
 
-1. **创建/更新 Plan 文件**: 在工作目录 (`/disk1/shigu.rsk/positioning/codes/auto_data/`) 维护 `PLAN_<名称>.md` 文件
+1. **创建/更新 Plan 文件**: 在当前项目根目录维护 `PLAN_<名称>.md` 文件
 2. **Context 恢复**: 每次 context compact 后，第一件事读取当前 plan 文件恢复上下文
 3. **进度同步**: 执行 plan 中的任务时，实时更新 plan 文件中的状态标记
 
@@ -62,7 +62,7 @@ description: Plan 文件管理：在工作目录维护 PLAN_*.md 文件，记录
 
 ### 执行 Plan
 
-1. 按 plan 中的实施顺序逐步执行
+1. 使用 `executing-plans` 按 plan 中的实施顺序逐步执行；本 skill 负责持久状态，不替代实现工作流
 2. 每完成一个 Step，更新 plan 文件中对应的状态标记
 3. 如果实现中发现 plan 有误（如接口不一致、维度错误），同步更新 plan
 
@@ -91,3 +91,11 @@ description: Plan 文件管理：在工作目录维护 PLAN_*.md 文件，记录
 - **Bug 记录**: 实现中发现并修复的 bug 要在对应 Step 中注明（如 `h0.squeeze(0)` → `h0[-1]` 修复）
 - **一个 feature 一个 plan**: 不要把多个不相关 feature 混在一个 plan 文件里
 - **Plan 是活文档**: 随着实现推进持续更新，不是写完就不管了
+
+## 验证
+
+- [ ] Plan 位于当前项目根目录且文件名为 `PLAN_<名称>.md`
+- [ ] 步骤状态与代码/文件的实际状态一致
+- [ ] 已完成步骤包含验证证据，未完成项没有被提前标记
+- [ ] 新发现的范围变化、风险和 blocker 已同步记录
+- [ ] Context 恢复后已核对 ⏳ 与未完成步骤对应的实际文件
