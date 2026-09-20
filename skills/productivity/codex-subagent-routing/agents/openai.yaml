@@ -1,0 +1,4 @@
+interface:
+  display_name: "Codex 子 Agent 委派配置"
+  short_description: "安装和校验 Luna、Terra、Sol、Astra 四角色及全局自动委派规则"
+  default_prompt: "使用 $codex-subagent-routing 启用自动委派：自动创建缺失的四角色 TOML，写入全局 AGENTS.md 调度规则并校验，保留已有定制及其他指令。"
